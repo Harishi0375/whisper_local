@@ -163,3 +163,6 @@ whisper_local/
 └── README.md
 ```
 
+## Final app layout
+
+![alt text](image.png)
