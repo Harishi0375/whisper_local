@@ -57,6 +57,7 @@ class WhisperApp:
         self.text_box = scrolledtext.ScrolledText(self.root, wrap="word",
             font=("", 11), height=12)
         self.text_box.pack(fill="both", expand=True, padx=12, pady=(4, 6))
+        self.text_box.bind("<Control-a>", self._select_all)
 
         tk.Button(self.root, text="📋 Copy to Clipboard",
             command=self._copy).pack(pady=(0, 10))
@@ -69,6 +70,10 @@ class WhisperApp:
             self.status_var.set(f"Ready ({size} model)")
             self.rec_btn.config(state="normal")
         threading.Thread(target=load, daemon=True).start()
+
+    def _select_all(self, event):
+        self.text_box.tag_add("sel", "1.0", "end")
+        return "break"
 
     def _toggle_recording(self):
         if not self.recording:
